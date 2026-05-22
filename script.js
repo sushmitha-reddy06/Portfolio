@@ -1,48 +1,69 @@
 // Portfolio Data - UPDATE THIS SECTION TO ADD/EDIT PROJECTS
 const projects = [
     {
-        title: "Enterprise Healthcare Management System",
-        description: "A comprehensive, modular Hospital Information Management System (HIMS).",
+        title: "MediaWall – Digital Signage Management Platform",
+        description: "A scalable backend system for managing multi-screen digital signage displays across organizations.",
         details: `
             <ul>
-                <li><strong>Architecture:</strong> Designed a modular Node.js/Express backend for scalable Admin, Lab, and Pharmacy workflows.</li>
-                <li><strong>Lab Operations:</strong> Built a full LIS tracking sample collection to result generation.</li>
-                <li><strong>Inventory Control:</strong> Implemented FIFO logic for pharmacy tracking to reduce waste.</li>
-                <li><strong>Security:</strong> Enforced RBAC and JWT authentication for secure access.</li>
+                <li><strong>REST APIs:</strong> Developed scalable APIs for managing multi-screen digital signage systems.</li>
+                <li><strong>Real-time Sync:</strong> Implemented real-time communication for live updates and synchronization using Socket.IO.</li>
+                <li><strong>Architecture:</strong> Designed multi-tenant database architecture ensuring scalability and data isolation.</li>
+                <li><strong>Security:</strong> Built JWT-based authentication and RBAC for secure multi-organization access.</li>
             </ul>
         `,
-        tech: ["Node.js", "Express", "MySQL", "Sequelize", "AWS S3"],
-        image: "assets/hims-dashboard.png",
+        tech: ["Node.js", "Express.js", "MongoDB", "Socket.IO"],
+        image: "http://mediawall.in/wp-content/uploads/2024/01/MW_Full_Logo.png",
         githubLink: "#",
-        liveLink: "#"
+        liveLink: "http://mediawall.in/"
     },
     {
-        title: "Coffee Shop SaaS",
-        description: "A full-featured ecosystem bridging coffee enthusiasts and local cafes.",
+        title: "Coffee Shop Discovery & Management Platform",
+        description: "A multi-tenant SaaS ecosystem for vendors and customers to discover and manage coffee orders.",
         details: `
             <ul>
-                <li><strong>Complex Logic:</strong> Designed a schema for deeply nested menu configurations (sizes, milks, addons).</li>
-                <li><strong>Payments:</strong> Implemented split-payment architecture for multi-vendor payouts.</li>
-                <li><strong>Analytics:</strong> Developed a dashboard for 'Average Order Value' and 'Peak Hours' insights.</li>
+                <li><strong>Architecture:</strong> Designed backend architecture supporting vendors and customers seamlessly.</li>
+                <li><strong>Order System:</strong> Built complex menu and order management system with deep customization logic.</li>
+                <li><strong>Data Processing:</strong> Developed bulk data import system for processing large datasets with validation.</li>
+                <li><strong>Payments & Invoicing:</strong> Integrated payment gateway with secure transaction handling and automated invoicing.</li>
+                <li><strong>Data Mining:</strong> Engineered Google Maps scraping system to onboard 150+ businesses with structured data.</li>
             </ul>
         `,
-        tech: ["TypeScript", "Node.js", "PostgreSQL", "Google Maps API", "Docker"],
-        image: "assets/brewfind-app.png",
+        tech: ["Node.js", "TypeScript", "PostgreSQL"],
+        image: "assets/coffeenity-logo.png",
         githubLink: "#",
-        liveLink: "#"
+        liveLink: "https://coffee-shop-rho-nine.vercel.app/"
     },
     {
-        title: "Social Media Analytics Dashboard",
-        description: "Admin dashboard for analytics visualization.",
+        title: "Enterprise Healthcare Management System (HIMS)",
+        description: "A comprehensive healthcare platform encompassing EMR, lab tracking, and pharmacy workflows.",
         details: `
             <ul>
-                <li><strong>Data Aggregation:</strong> Unified data from multiple social platforms into a single view.</li>
-                <li><strong>Visualization:</strong> Implemented Chart.js for interactive graphs and trends.</li>
-                <li><strong>Database:</strong> Optimized SQL queries for complex data aggregations and reporting.</li>
+                <li><strong>Core Modules:</strong> Developed scalable healthcare system with modules for EMR, lab management, and pharmacy.</li>
+                <li><strong>Security:</strong> Implemented secure role-based access for doctors, patients, and administrators.</li>
+                <li><strong>Dashboards:</strong> Built real-time dashboards and patient record management system.</li>
+                <li><strong>Storage:</strong> Integrated AWS S3 for secure storage of medical files and reports.</li>
+                <li><strong>Notifications:</strong> Automated patient notifications using WhatsApp integration.</li>
             </ul>
         `,
-        tech: ["JavaScript", "Sequelize", "MySQL", "Chart.js"],
-        image: "assets/project3.png",
+        tech: ["Node.js", "Express.js", "MySQL", "AWS S3"],
+        image: "https://health-care-one-lake.vercel.app/hospital.svg",
+        githubLink: "#",
+        liveLink: "https://health-care-one-lake.vercel.app/"
+    },
+    {
+        title: "Music Booking Platform (Tanboura)",
+        description: "Payment system enhancements for a music booking and e-commerce application.",
+        details: `
+            <ul>
+                <li><strong>Split Payments:</strong> Implemented a split payment system (booking fee + final payment) to reduce cancellation risks.</li>
+                <li><strong>Database Schema:</strong> Updated workflows to support two-stage transactions with accurate tracking across modules.</li>
+                <li><strong>State Management:</strong> Built automated booking state transitions (tentative → confirmed → canceled) based on payment status.</li>
+                <li><strong>Automations:</strong> Developed backend logic for payment due dates, automated reminders, and booking expiration.</li>
+                <li><strong>Edge Cases:</strong> Handled complex refund/cancellation scenarios and manual final payment flows with admin intervention.</li>
+            </ul>
+        `,
+        tech: ["Node.js", "Express.js", "Sequelize", "PostgreSQL", "MySQL"],
+        image: "assets/tanboura_logo.png",
         githubLink: "#",
         liveLink: "#"
     }
@@ -59,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initTilt();
     initTimelineAnimation();
     initScrollTop();
+    initActiveNav();
+    initMarquee();
 });
 
 // Function to load projects into the grid
@@ -363,4 +386,54 @@ if (contactForm) {
             }, 3000);
         }, 2000);
     });
+}
+
+// Active Navigation Link Logic
+function initActiveNav() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+}
+
+// Marquee Dynamic Content Logic
+function initMarquee() {
+    const marqueeContent = document.getElementById('marquee-content');
+    if (!marqueeContent) return;
+
+    const marqueeTechs = [
+        { icon: "fa-brands fa-node", name: "Node.js" },
+        { icon: "fa-brands fa-js", name: "JavaScript" },
+        { icon: "fa-brands fa-python", name: "Python" },
+        { icon: "fa-solid fa-leaf", name: "MongoDB" },
+        { icon: "fa-solid fa-database", name: "PostgreSQL" },
+        { icon: "fa-solid fa-database", name: "MySQL" },
+        { icon: "fa-brands fa-git-alt", name: "Git" },
+        { icon: "fa-solid fa-server", name: "Express" },
+        { icon: "fa-brands fa-vuejs", name: "Vue.js" },
+        { icon: "fa-brands fa-react", name: "React.js" }
+    ];
+
+    const createItems = () => {
+        return marqueeTechs.map(tech => `<span><i class="${tech.icon}"></i> ${tech.name}</span>`).join('');
+    };
+
+    // Populate twice for seamless looping
+    marqueeContent.innerHTML = createItems() + createItems();
 }
