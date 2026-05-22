@@ -337,8 +337,9 @@ function initHamburgerMenu() {
     }
 }
 
-// Simple Typing Effect (Placeholder for future)
+// Typing Effect for developer roles
 function initTypingEffect() {
+    // Typing effect removed in favor of static text
 }
 
 // Contact Form Handler

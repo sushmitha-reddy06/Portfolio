@@ -226,10 +226,7 @@ img {
     font-weight: 400;
 }
 
-.hero h2.typing-text::after {
-    content: "|";
-    animation: blink 1s step-end infinite;
-}
+
 
 .bio {
     font-size: 1.1rem;
